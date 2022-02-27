@@ -11,7 +11,7 @@ Please also refer to the original implementation at https://github.com/manigalat
 This might be a little bit different from what's been specified in the original paper and the author's official repo. (My workstation's GPU supports CUDA 11 instead of CUDA 10, so the torch/cudatoolkit version was adjusted accordingly)
  * python 3.7.11
  * torch 1.9.0
- * cudatoolkit 11.3 (to allow use of GPU, not compulsory)
+ * cudatoolkit 11.3
  * numpy 1.21.2
  * sklearn 1.0.2
  * pandas 1.3.5
