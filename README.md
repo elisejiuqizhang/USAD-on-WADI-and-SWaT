@@ -33,4 +33,4 @@ The WADI datasets is extremely big and contains a lot of missing values (will be
 My solution here for now is to remove the columns that doesn't have any valid entries and replace the rest NaNs with zeros. (But there might be a better way, so open to discussions I guess)
 
 ## Another Note Regarding Downsampling
-As mentioned in the paper's supplementary material, I used a downsampling rate of 5 for both SWaT and WADI. In my implementation, this isn't necessary for SWaT (it can be executed normally without any downsampling), but is necessary for WADI because WADI is huge and takes a lot of memory (my execution would be killed midway by the system if I didn't use any downsampling).
+As mentioned in the paper's supplementary material, I used a downsampling rate of 5 for both SWaT and WADI. In my implementation, this isn't necessary for SWaT (it can be executed normally without any downsampling), but is necessary for WADI because WADI is huge and the processing takes a lot of memory (my execution would be killed mid-way by the system if I didn't use any downsampling).
