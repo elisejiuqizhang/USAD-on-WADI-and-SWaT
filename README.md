@@ -3,7 +3,7 @@
 This is an unofficial implementation of the USAD architecture modified from the authors' original repo.
 Here, it was adapted to work on two datasets, SWaT and WADI, used in the original paper.
 
-Please also refer to the original implementation at https://github.com/manigalati/usad and the paper can be found at https://dl.acm.org/doi/10.1145/3394486.3403392.
+Please also refer to the original implementation at https://github.com/manigalati/usad and the paper https://dl.acm.org/doi/10.1145/3394486.3403392.
 
 
 
