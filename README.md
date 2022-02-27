@@ -22,8 +22,8 @@ This might be a little bit different from what's been specified in the original 
 
 Both SWaT and WADI datasets are collected by “iTrust, Centre for Research in Cyber Security, Singapore University of Technology and Design”. If you intend to publish paper using these datasets, you have to first request access through their official website https://itrust.sutd.edu.sg/itrust-labs_datasets/ and give explicit credit to their lab.
 
-* *SWaT dataset: https://itrust.sutd.edu.sg/itrust-labs_datasets/dataset_info/#swat
-* *WADI dataset: https://itrust.sutd.edu.sg/itrust-labs_datasets/dataset_info/#wadi
+* SWaT dataset: https://itrust.sutd.edu.sg/itrust-labs_datasets/dataset_info/#swat
+* WADI dataset: https://itrust.sutd.edu.sg/itrust-labs_datasets/dataset_info/#wadi
 
 ### Dataset Usage
 The data files are too large to be uploaded to the repo. After your access to the datasets has been approved, you should create a folder "input" under the main branch, then download the corresponding CSV files into it. (What I was using when testing was the Attack_v0 and Normal_v1 under "SWaT A1&A2 Dec 2015 - Physical", and the data files within "WADI A1_9 Oct 2017")
