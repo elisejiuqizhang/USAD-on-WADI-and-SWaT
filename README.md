@@ -1,4 +1,4 @@
-# Unofficial Implementation of USAD on WADI and SWaT datasets
+# Unofficial Implementation of USAD on WADI and SWaT Datasets
 
 This is an unofficial implementation of the USAD architecture modified from the authors' original repo.
 Here, it was adapted to work on two datasets, SWaT and WADI, used in the original paper.
@@ -29,5 +29,8 @@ Both SWaT and WADI datasets are collected by “iTrust, Centre for Research in C
 The data files are too large to be uploaded to the repo. After your access to the datasets has been approved, you should create a folder "input" under the main branch, then download the corresponding CSV files into it. (What I was using when testing was the Attack_v0 and Normal_v1 under "SWaT A1&A2 Dec 2015 - Physical", and the data files within "WADI A1_9 Oct 2017")
 
 ### Some Issues with the WADI datasets 
-The WADI datasets contains a lot of missing values (will be interpreted by NaN if imported into pd.Dataframe). These NaNs will affect the training of the model (so you would get NaN loss for every epoch). 
+The WADI datasets is extremely big and contains a lot of missing values (will be interpreted by NaN if imported into pd.Dataframe). These NaNs will affect the training of the model (so you would get NaN loss for every epoch). 
 My solution here for now is to remove the columns that doesn't have any valid entries and replace the rest NaNs with zeros. (But there might be a better way, so open to discussions I guess)
+
+## Another Note Regarding Downsampling
+As mentioned in the paper's supplementary material, I used a downsampling rate of 5 for both SWaT and WADI. In my implementation, this isn't necessary for SWaT (it can be executed normally without any downsampling), but is necessary for WADI because WADI is huge and takes a lot of memory (my execution would be killed midway by the system if I didn't use any downsampling).
