@@ -15,6 +15,7 @@ This might be a little bit different from what's been specified in the original 
  * numpy 1.21.2
  * sklearn 1.0.2
  * pandas 1.3.5
+ * matplotlib 3.5.1
 
 
 ## Requesting Access to the Datasets and Usage
