@@ -1,7 +1,18 @@
-import torch
-import torch.nn as nn
+'''This is mostly adapted from GitHub repo https://github.com/manigalati/usad.,
+original paper was published at KDD 2020 at https://dl.acm.org/doi/10.1145/3394486.3403392, 
+titled "USAD: UnSupervised Anomaly Detection on Multivariate Time Series".
+Please also check the authors' original paper and implementation for reference.'''
+
+'''One small modification here is that I added the function testing_threshold() based on 
+the contamination rate already known, which returns the threshold for interpreting anomaly scores.'''
 
 from utils import *
+
+import torch
+import torch.nn as nn
+from torch.utils.data import ConcatDataset, DataLoader
+
+
 device = get_default_device()
 
 class Encoder(nn.Module):
@@ -104,12 +115,33 @@ def training(epochs, model, train_loader, val_loader, opt_func=torch.optim.Adam)
         model.epoch_end(epoch, result)
         history.append(result)
     return history
-    
-def testing(model, test_loader, alpha=.5, beta=.5):
+
+def training_scores(model, train_loader, val_loader=None, alpha=.5, beta=.5):
+    if val_loader is None:
+      trainval=train_loader
+    else:
+      trainval = [d for dl in [train_loader, val_loader] for d in dl]
     results=[]
-    for [batch] in test_loader:
+    for [batch] in trainval:
         batch=to_device(batch,device)
         w1=model.decoder1(model.encoder(batch))
         w2=model.decoder2(model.encoder(w1))
-        results.append(alpha*torch.mean((batch-w1)**2,axis=1)+beta*torch.mean((batch-w2)**2,axis=1))
+        results.append(alpha*torch.mean((batch-w1)**2,dim=1)+beta*torch.mean((batch-w2)**2,dim=1))
     return results
+    
+    
+def testing_scores(model, test_loader, alpha=.5, beta=.5):
+  results=[]
+  for [batch] in test_loader:
+      batch=to_device(batch,device)
+      w1=model.decoder1(model.encoder(batch))
+      w2=model.decoder2(model.encoder(w1))
+      #results.append(alpha*torch.mean((batch-w1)**2,axis=1)+beta*torch.mean((batch-w2)**2,axis=1))
+      results.append(alpha*torch.mean((batch-w1)**2,dim=1)+beta*torch.mean((batch-w2)**2,dim=1))
+  return results
+
+def testing_threshold(model, test_loader, alpha=.5, beta=.5, contamination=0.1):
+  results=testing_scores(model, test_loader, alpha=.5, beta=.5)
+  score_pred=np.concatenate([torch.stack(results[:-1]).flatten().detach().numpy(), 
+                                         results[-1].flatten().detach().numpy()])
+  return np.sort(score_pred)[int(len(score_pred)*(1-contamination))]
